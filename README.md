@@ -1,1 +1,1 @@
-sfdx-travisci-org
+sfdx-travisci-orgs
