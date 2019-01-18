@@ -41,7 +41,7 @@ script:
 #
 
   #Authorize Target Deployment Org
-- sfdx force:auth:jwt:grant --clientid $UATCONSUMERKEY --jwtkeyfile assets/server.key --username $UATUSERNAME --setalias UAT
+- sfdx force:auth:jwt:grant --clientid $CONSUMERKEY --jwtkeyfile assets/server.key --username $USERNAME --setalias UAT
   #Deploy to Target Deployment Org and Run Unit Tests
 - sfdx force:mdapi:deploy --wait 10 --deploydir $DEPLOYDIR --targetusername UAT --testlevel $TESTLEVEL
   #Example shows how to run a check only deploy.
