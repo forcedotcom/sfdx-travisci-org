@@ -17,7 +17,8 @@ If any any of these assumptions aren't true, the following steps won't work.
 
 3) Make sure you have the Salesforce CLI installed. Check by running `sfdx force --help` and confirm you see the command output. If you don't have it installed you can download and install it from [here](https://developer.salesforce.com/tools/sfdxcli).
 
-4) Setup a JWT-based auth flow for the target orgs that you want to deploy to.  This example used the same server.crt file for the connected app in the target org.
+4) Setup a JWT-based auth flow for the target orgs that you want to deploy to.  This step will create a server.key file that will be used in subsequent steps.
+(https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_auth_jwt_flow.htm)  
 
 5) Confirm you can perform a JWT-based auth to the Target orgs: `sfdx force:auth:jwt:grant --clientid <your_consumer_key> --jwtkeyfile server.key --username <your_username>`
 
