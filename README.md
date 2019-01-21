@@ -31,17 +31,17 @@ If any any of these assumptions aren't true, the following steps won't work.
 
 7) From you JWT-Based connected app on Salesforce, retrieve the generated `Consumer Key`.
 
-8) Add your `server.key` that you generated previously to the folder called `assets`.
+8) Locate your `server.key` that you generated previously and keep track of it's location
 
 9) Open the `.travis.yml` file and remove the first line that starts with `openssl ...` and save the file.
 
 10) From the root folder of your local project, encrypt your `server.key` value:
+    `cd your_project_location`
+    `travis encrypt-file your_key_location/server.key assets/server.key.enc --add`
 
-    travis encrypt-file assets/server.key assets/server.key.enc --add
+    This should have replaced the existing server.key.enc with your encrypted version.
 
-11) IMPORTANT! Remove your `server.key`: `rm assets/server.key`, you should never store keys or certificates in a public place.
-
-12) Commit the updated `.travis.yml` file.
+11) Commit the updated `.travis.yml` and `server.key.enc` files.
  
 
 And you should be ready to go! Now when you commit and push a change, your change will kick off a Travis CI build.
