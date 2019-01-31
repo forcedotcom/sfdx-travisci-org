@@ -15,7 +15,7 @@ If any any of these assumptions aren't true, the following steps won't work.
 
 2) Clone your forked repo locally: `git clone https://github.com/<git_username>/sfdx-travisci-org.git`
 
-3) Make sure you have the Salesforce CLI installed. Check by running `sfdx force --help` and confirm you see the command output. If you don't have it installed you can download and install it from [here](https://developer.salesforce.com/tools/sfdxcli).
+3) Make sure you have the Salesforce CLI installed. Check by running `sfdx force --help` and confirm you see the command output. If you don't have it installed, you can download and install it from [here](https://developer.salesforce.com/tools/sfdxcli).
 
 4) Setup a JWT-based auth flow for the target orgs that you want to deploy to.  This step will create a server.key file that will be used in subsequent steps.
 (https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_auth_jwt_flow.htm)  
@@ -30,9 +30,9 @@ If any any of these assumptions aren't true, the following steps won't work.
     travis env set CONSUMERKEY <your_consumer_key>
 
 
-7) From you JWT-Based connected app on Salesforce, retrieve the generated `Consumer Key`.
+7) From your JWT-Based connected app on Salesforce, retrieve the generated `Consumer Key`.
 
-8) Locate your `server.key` that you generated previously and keep track of it's location
+8) Locate your `server.key` that you generated previously and keep track of its location
 
 9) Open the `.travis.yml` file and remove the first line that starts with `openssl ...` and save the file.
 
