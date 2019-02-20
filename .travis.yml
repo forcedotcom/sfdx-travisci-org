@@ -1,4 +1,4 @@
-#Gives permission to install SFDX
+#Gives permission to install Salesforce CLI
 sudo: true
 
 before_install:
@@ -17,7 +17,7 @@ before_install:
 - export SFDX_DOMAIN_RETRY=300
 - export SFDX_DISABLE_APP_HUB=true
 - export SFDX_LOG_LEVEL=DEBUG
-#Create SFDX directory
+#Create sfdx directory
 - mkdir sfdx
 #Install Salesforce CLI
 - wget -qO- $CLIURL | tar xJ -C sfdx --strip-components 1
@@ -37,12 +37,12 @@ before_script:
 
 script:
 #
-# The script step will authenticate to the target deployment org and deploy the metadata.
+# The script step authenticates to the target deployment org and deploys the metadata
 #
 
   #Authorize target deployment org
 - sfdx force:auth:jwt:grant --instanceurl https://test.salesforce.com  --clientid $CONSUMERKEY --jwtkeyfile assets/server.key --username $USERNAME --setalias UAT
   #Deploy to target deployment org and run unit tests
 - sfdx force:mdapi:deploy --wait 10 --deploydir $DEPLOYDIR --targetusername UAT --testlevel $TESTLEVEL
-  #Example shows how to run a check only deploy.
+  #Example shows how to run a check-only deploy.
   #- sfdx force:mdapi:deploy --checkonly --wait 10 --deploydir $DEPLOYDIR --targetusername UAT --testlevel $TESTLEVEL
