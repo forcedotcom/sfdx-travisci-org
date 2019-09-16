@@ -1,5 +1,7 @@
 sudo: true
 before_install:
+- openssl aes-256-cbc -k "$super_secret_password" -in super_secret.txt.enc -out super_secret.txt
+  -d
 - openssl aes-256-cbc -K $encrypted_d5f195580ab7_key -iv $encrypted_d5f195580ab7_iv
   -in assets/server.key.enc -out assets/server.key -d
 - export CLIURL=https://developer.salesforce.com/media/salesforce-cli/sfdx-linux-amd64.tar.xz
@@ -22,3 +24,7 @@ script:
   $CONSUMERKEY --jwtkeyfile assets/server.key --username $USERNAME --setalias UAT
 - sfdx force:mdapi:deploy --wait 10 --deploydir $DEPLOYDIR --targetusername UAT --testlevel
   $TESTLEVEL
+env:
+  global:
+  - secure: oyP6cY1WHt+vpZPAuVNgD9CXTZlk19rkR1Mqc5bHWDxiZH8gVwOebsNpPECwAzapvdLq/vMEFY3LjHEsz3z7ril8phhvmQ2GzCp/zcn4Ji7hQK+I4bvbS3jkkvppXpmNnpjYv3fxogc29gAh8r0nEstl/0EjusZM/hCilAfNSz+Bel9+ZIrapj/Pt180/8huUQYNxwlWMsryltNhrSBPsvaCwI4QGYUmrfJCJs9fLyXrL/KPILfrn/v1nGqY8TfBLEf/zQlsQLpQd7ftuwtS37+9ENCfi5qm7Wg4qy4u6W+0fzjgrF46HXVwrnIMlqak/zq0C0bEIyK0WOieLhVpjzMjyHoakbNynvE3Qc6J3xv6pObW3LfjPZAWxUz9DsRyTq1g63mNCSopq3tA+QVWXdslkz6xanKa8+vmepfT8zBIYF3h07KgLp1gVCeT9eCbWUKE8UlSdg+CMojqh77XMBNVs90MMHNg67c5r0fOSZv23vWYPEBOem+IMhUvLTy99QlW70nP0ANF9bExLWK9TNVuMDV7kWWtXNhOEWBygQB6iMY4xgegB5wiq5SVHWmrB4AvOZTsoSSZpBCZU2+wdAhO4t2XkmGYfF8QDxAVJrPwUc/WY0gpMImRGKHMHdPvkCjrJByXXhTYLb1vFx543mShyfqv3m6+gkHuX235uF8=
+  - secure: pwI14zFdKcdFFnZ7MUljEP0U14qq7Lg+STqcVUr7yA+Os6MECiBHWMqwF6/3woZ59WGe7JRp6NdUYtr9Q+kW28nOI72qNPrbq5BV1LBg8+VqsjJZVDPiPk1uWVmc/SN+XR2bDm7m84jVvTQ2L08vlm4cm90qo6jEYfzj605gbLWvBifica2BW40xZKYdLvXF08EujgkOIfLRzVBUaqpVj+TzNSKZHj/3eLtI0cwkZQBmVYCZ8x/IDUvQTjorRKJul4Jj5nb5rbAhmMX2oN5kcBXcHnBuwNWsDfSkPhgWlBmn0zzoLSuFnbA0paYsUyyKvM2N2/tDUCabWbsPLa7h5EA5U6NLabFiw56uf1VCIzWaT9kN0uoyxLFV0hLnfAF8V3MDQvO5YjTF57Dvm3vKXz3ASZQm/1zbOoH0vSMagnjc8UUDVHJhZJWBvZZ885G9jcQJUFxVA1525NrqELqRiHxta9ty/khBG5aBASgmVbTjjQDm2Gmn6C/YfwNgJSEVYY3M9YvdaL7vfbN+RIXs7MfmX3FSRVWAFB10newQvRO14e3EYRsaxaG5Ty11VfgSRytlZUAKTw84UWLC/itnRtb+lN7OpGC91EyvIBOqDWuVUCo6JpZ1RgiQBKizD3DDbREuTQ/FRSWINPKoYhLlZfhywHWo6e782JTK3NOFbD4=
