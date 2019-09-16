@@ -1,0 +1,15 @@
+<aura:component >
+ 
+    <aura:attribute name="message" type="String"/>
+ 
+    <p>Message of the day: <ui:outputText value="{!v.message}"/></p>
+ 
+    <div>
+        <ui:button label="You look nice today."
+            press="{!c.handleClick}"/>
+ 
+        <ui:button label="Today is going to be a great day!"
+            press="{!c.handleClick}"/>
+    </div>
+ 
+</aura:component>

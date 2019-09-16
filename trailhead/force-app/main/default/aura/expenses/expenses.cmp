@@ -1,0 +1,48 @@
+<aura:component controller="ExpensesController">
+    <aura:attribute name="expenses" type="Expense__c[]"/>
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+    <aura:handler name="createExpense" event="c:expensesItemUpdate"
+                  action="{!c.handleCreateExpense}"/>
+    <aura:handler name="updateExpense" event="c:expensesItemUpdate"
+                  action="{!c.handleUpdateExpense}"/>
+    
+    <!-- PAGE HEADER -->
+    <div class="slds-page-header" role="banner">
+        <div class="slds-grid">
+            <div class="slds-col">
+                <p class="slds-text-heading--label">Expenses</p>
+                <h1 class="slds-text-heading--medium">My Expenses</h1>
+            </div>
+        </div>
+    </div>
+    <!-- / PAGE HEADER -->
+    
+    <!-- NEW EXPENSE FORM -->
+    <div class="slds-col slds-col--padded slds-p-top--large">
+        
+        <c:expenseForm />
+        
+    </div>
+    <!-- / NEW EXPENSE FORM -->
+    
+    <!-- EXISTING EXPENSES -->
+    <div class="slds-grid slds-m-top--large">
+        
+        <!-- EXPENSES LIST -->
+        <div class="slds-col slds-col-rule--right slds-p-around--small
+                    slds-size--8-of-12">
+            <c:expensesList expenses="{!v.expenses}"/>
+        </div>
+        <!-- / EXPENSES LIST -->
+        
+        <!-- SOMETHING COOL -->
+        <div class="slds-col slds-p-left--large slds-size--4-of-12">
+            <!-- Bonus lesson, coming soon.
+                 Watch this space for details. -->
+        </div>
+        <!-- / SOMETHING COOL -->
+        
+    </div>
+    <!-- / EXISTING EXPENSES -->
+    
+</aura:component>

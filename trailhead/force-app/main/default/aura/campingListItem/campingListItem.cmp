@@ -1,0 +1,33 @@
+<aura:component >
+    <aura:attribute name="item" type="Camping_Item__c" required="true"/>
+    <aura:registerEvent name="updateItem" type="c:addItemEvent"/>
+    <div class="slds-card">
+        <!-- Color the item green if the item is packed -->
+        <div class="{!v.item.Packed__c == true ?
+                    'slds-theme--success' : 'slds-theme--warning'}">
+            
+            <header class="slds-card__header slds-grid grid--flex-spread">
+                <a aura:id="item" href="{!'/' + v.item.Id}">
+                    <h3>{!v.item.Name}</h3>
+                </a>
+            </header>  
+            <section class="slds-card__body">
+                <div class="slds-tile slds-hint-parent">
+                    <p class="slds-tile__title slds-truncate">Item: 
+                        <ui:outputText value="{!v.item.Name}"/>
+                    </p>
+                    <p class="slds-truncate">Price: 
+                        <ui:outputCurrency value="{!v.item.Price__c}"/>
+                    </p>
+                    <p class="slds-truncate">Qty:
+                        <ui:outputNumber value="{!v.item.Quantity__c}"/>
+                    </p>
+                    <p class="slds-truncate">Packed: 
+                        <ui:outputCheckbox value="{!v.item.Packed__c}"
+                            click="{!c.clickPacked}"/>
+                    </p>
+                </div>
+            </section>
+        </div>
+    </div>
+</aura:component>

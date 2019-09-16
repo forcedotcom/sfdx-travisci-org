@@ -1,0 +1,3 @@
+<aura:event type="COMPONENT">
+    <aura:attribute name="expense" type="Expense__c"/>
+</aura:event>

@@ -1,0 +1,35 @@
+<aura:component >
+    <aura:attribute name="expense" type="Expense__c"/>
+	<aura:registerEvent name="updateExpense" type="c:expensesItemUpdate"/>
+    <div class="slds-card">
+        <!-- Color the item green if the expense is reimbursed -->
+        <div class="{!v.expense.Reimbursed__c == true ?
+            'slds-theme--success' : 'slds-theme--warning'}">
+
+            <header class="slds-card__header slds-grid grid--flex-spread">
+                <a aura:id="expense" href="{!'/' + v.expense.Id}">
+                    <h3>{!v.expense.Name}</h3>
+                </a>
+            </header>
+
+            <section class="slds-card__body">
+                <div class="slds-tile slds-hint-parent">
+                    <p class="slds-tile__title slds-truncate">Amount:
+                        <ui:outputCurrency value="{!v.expense.Amount__c}"/>
+                    </p>
+                    <p class="slds-truncate">Client:
+                        <ui:outputText value="{!v.expense.Client__c}"/>
+                    </p>
+                    <p class="slds-truncate">Date:
+                        <ui:outputDate value="{!v.expense.Date__c}"/>
+                    </p>
+                    <p class="slds-truncate">Reimbursed?
+                        <ui:inputCheckbox value="{!v.expense.Reimbursed__c}"
+                            click="{!c.clickReimbursed}"/>
+                    </p>
+                </div>
+            </section>
+        </div>
+    </div>
+
+</aura:component>

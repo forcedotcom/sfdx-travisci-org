@@ -1,0 +1,10 @@
+<apex:page controller="CalloutController" showChat="false" showHeader="false">
+   <apex:form >
+      <!-- Invokes the action method when the user clicks this button. -->
+      <apex:commandButton action="{!startRequest}" 
+              value="Start Request" reRender="result"/> 
+   </apex:form>
+
+   <!-- This output text component displays the callout response body. -->
+   <apex:outputText id="result" value="{!result}" />
+</apex:page>
