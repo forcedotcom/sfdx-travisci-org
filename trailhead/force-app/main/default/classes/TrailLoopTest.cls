@@ -19,7 +19,7 @@ private class TrailLoopTest {
             insert tasks;
             
             test.startTest();
-            //TrailLoop.AllBadThings(a);
+            TrailLoop.AllGoodThings(a);
             test.stopTest();
         
         }
