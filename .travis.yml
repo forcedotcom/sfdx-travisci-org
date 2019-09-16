@@ -21,7 +21,7 @@ before_script:
 - sfdx --version
 - sfdx plugins --core
 script:
-- sfdx force:auth:jwt:grant --instanceurl https://test.salesforce.com  --clientid
+- sfdx force:auth:jwt:grant --instanceurl https://login.salesforce.com  --clientid
   $CONSUMERKEY --jwtkeyfile assets/server.key --username $USERNAME --setalias UAT
 - sfdx force:mdapi:deploy --wait 10 --deploydir $DEPLOYDIR --targetusername UAT --testlevel
   $TESTLEVEL
