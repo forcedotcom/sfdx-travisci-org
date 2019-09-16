@@ -23,4 +23,4 @@ before_script:
 script:
 - sfdx force:auth:jwt:grant --instanceurl https://login.salesforce.com  --clientid
   $CONSUMERKEY --jwtkeyfile assets/server.key --username $USERNAME --setalias UAT
-- sfdx force:source:deploy --wait 10 -p $DEPLOYDIR -l $TESTLEVEL
+- sfdx force:source:deploy -p $DEPLOYDIR -l RunLocalTests
