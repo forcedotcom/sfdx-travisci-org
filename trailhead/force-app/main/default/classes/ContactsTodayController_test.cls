@@ -4,7 +4,7 @@ public class ContactsTodayController_test {
     @IsTest(SeeAllData=true)
     public static void TestContactsTodayController() {
         
-        User u = [SELECT ID From User LIMIT 1];
+        User u = [SELECT ID From User WHERE IsActive = TRUE LIMIT 1];
         
         System.runAs(u) {
         

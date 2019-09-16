@@ -3,6 +3,9 @@
         "experimentalDecorators": true,
         "baseUrl": ".",
         "paths": {
+            "c/Leaflet": [
+                "../staticresources/Leaflet/Leaflet.js"
+            ],
             "c/nouislider": [
                 "../staticresources/nouislider/nouislider.js"
             ]
