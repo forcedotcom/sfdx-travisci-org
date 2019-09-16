@@ -16,7 +16,7 @@ before_install:
 - "./sfdx/install"
 - export PATH=./sfdx/$(pwd):$PATH
 before_script:
-- export DEPLOYDIR=src
+- export DEPLOYDIR=trailhead
 - export TESTLEVEL=RunLocalTests
 - sfdx --version
 - sfdx plugins --core
