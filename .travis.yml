@@ -2,13 +2,12 @@ sudo: true
 env:
   global:
     secure: Qh6CwllmypBGULWoxkUWqkANrn9lOsKmggdPYZjlG/voHv7xckg8EAAWIIrzI7bM7+aURCxf1UcMZOHe7sXb/mVwb1+D88k2EwP4jOwv2QoJwl4MCaX4rEdThxh+FjRLfGX9p5v5QOSELStd4sluDeEzLKOdcELwsXB40An5mWb7lNPJIhPZb0MOzucMhsjthA4LlFo18ukakWLySVH+ZQzZNpOYvDGDCmoPzejFVKkBfdBrSrP5dZ3ELBAzNpE2Lh/B0WdKi8eaAwhXFjELSnpMVx3y+L8XCllYL4VjsdM5GXsTN0VRxdx5xlDh4gmpBLIeh5p2UTvohPljmEqhvkk8nb/Ia8iNTDuUp3e8wl6T9XGK6T2Uy3VyOcTpbkKeFrGFqK5iVuKPtbTHAqPt7RybnWCwFi8aPNs8G2nllGhk76fVQ9ArdrlUrrm/rhgyFGzFYw1QfjARi7wP3wblxIYwNn9RVR5HxQliadinh3Hd6AbGq4mZK4tueG2r4K3Lcj2DTQQ9zTd/iyb8v6q5DrKKgzxL+36LeVLh/858KRINju7dVegJXKsXWqHaSgdevMOaYkEhId02UF2kI0c+auasSCA5rpe9Jk5lTrZ1C+Wr2C2kVMKJ+mH4YvqFk2Y0QQH716vdhd9NwSYS6RL5IKYdg9e/1r1NUftD6GKw8WY=
-script:
-  # get list of changed files
-  - CHANGED_FILES=($(git diff --name-only $TRAVIS_COMMIT_RANGE))
-  # save names of any chan
-  - echo test
-  - echo $CHANGED_FILES
 before_install:
+# get list of changed files
+- CHANGED_FILES=($(git diff --name-only $TRAVIS_COMMIT_RANGE))
+# save names of any chan
+- echo test
+- echo $CHANGED_FILES
 - openssl aes-256-cbc -k "$super_secret_password" -in assets/server.key.enc -out assets/server.key
   -d
 - export CLIURL=https://developer.salesforce.com/media/salesforce-cli/sfdx-linux-amd64.tar.xz
