@@ -24,6 +24,7 @@ before_install:
   done
 - if [[ $changes != "" ]]; then
     changes="$changes$quote";
+    echo $changes;
   fi
 - openssl aes-256-cbc -k "$super_secret_password" -in assets/server.key.enc -out assets/server.key
   -d
