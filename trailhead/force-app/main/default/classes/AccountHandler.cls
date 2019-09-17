@@ -4,7 +4,7 @@ public class AccountHandler {
         try {
             Account newAccount = new Account(Name=acctName);
             insert newAccount;
-            //test2
+            //test
             return newAccount;
         } catch (DmlException e) {
             System.debug('A DML exception has occurred: ' + e.getMessage());
