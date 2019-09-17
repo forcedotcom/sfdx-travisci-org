@@ -30,5 +30,5 @@ script:
 - sfdx force:auth:jwt:grant --instanceurl https://login.salesforce.com  --clientid
   $CONSUMERKEY --jwtkeyfile assets/server.key --username $USERNAME --setalias UAT
 - cd trailhead/
-- sfdx force:source:deploy -p $CHANGED_FILES
+- sfdx force:source:deploy -p $CHANGED_FILES -u mattvitale@gmail.com
 
