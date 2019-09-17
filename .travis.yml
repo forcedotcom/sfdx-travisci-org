@@ -5,9 +5,15 @@ env:
 before_install:
 # get list of changed files
 - CHANGED_FILES=($(git diff --name-only $TRAVIS_COMMIT_RANGE))
-# save names of any chan
+# save names of any change
 - echo test
 - echo $CHANGED_FILES
+- for file in $CHANGED_FILES; do
+    echo $file;
+    dir=$(dirname $file);
+    echo $dir;
+    [[ "${dir}" != "." ]] && dirname $file >> folders.txt;
+    done
 - openssl aes-256-cbc -k "$super_secret_password" -in assets/server.key.enc -out assets/server.key
   -d
 - export CLIURL=https://developer.salesforce.com/media/salesforce-cli/sfdx-linux-amd64.tar.xz
