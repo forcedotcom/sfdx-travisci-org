@@ -12,7 +12,7 @@ before_install:
 - for file in $(git diff --name-only $TRAVIS_COMMIT_RANGE); do
   if [ "$file" = ".travis.yml" ]; then 
     echo match
-  fi
+  fi;
   echo $file;
   done
 - openssl aes-256-cbc -k "$super_secret_password" -in assets/server.key.enc -out assets/server.key
