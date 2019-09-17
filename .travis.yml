@@ -15,13 +15,13 @@ before_install:
   else
     if [[ $changes == "" ]]; then
         name=$file;
-        name=${name#"prefix"};
+        name=${name#"$prefix"};
         changes="$quote$name";
         echo $changes;
     else
         comma=", ";
         name=$file;
-        name=${name#"prefix"};
+        name=${name#"$prefix"};
         changes="$changes$comma$name";
         echo $changes;
     fi
