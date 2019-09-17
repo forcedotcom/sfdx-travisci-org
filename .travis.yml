@@ -9,10 +9,18 @@ before_install:
 - echo test
 - echo $(git diff --name-only $TRAVIS_COMMIT_RANGE)
 - echo $CHANGED_FILES
+- changes=""
 - for file in $(git diff --name-only $TRAVIS_COMMIT_RANGE); do
   echo $file;
   if [[ $file == ".travis.yml" ]]; then 
     echo "match";
+  else
+    if [[ $changes == "" ]]; then
+        changes="$file"
+        echo $changes;
+    else
+        comma=", "
+        changes="$changes$comma$file"
   fi
   done
 - openssl aes-256-cbc -k "$super_secret_password" -in assets/server.key.enc -out assets/server.key
