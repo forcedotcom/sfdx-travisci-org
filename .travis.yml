@@ -21,6 +21,7 @@ before_install:
     else
         comma=", "
         changes="$changes$comma$file"
+    fi
   fi
   done
 - openssl aes-256-cbc -k "$super_secret_password" -in assets/server.key.enc -out assets/server.key
