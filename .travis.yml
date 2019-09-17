@@ -7,17 +7,22 @@ before_install:
 # save names of any change
 - quote="\""
 - changes=""
+- prefix="trailhead/"
 - for file in $(git diff --name-only $TRAVIS_COMMIT_RANGE); do
   echo $file;
   if [[ $file == ".travis.yml" ]]; then 
     echo "match";
   else
     if [[ $changes == "" ]]; then
-        changes="$quote$file";
+        name=$file;
+        name=${name#"prefix"};
+        changes="$quote$name";
         echo $changes;
     else
         comma=", ";
-        changes="$changes$comma$file";
+        name=$file;
+        name=${name#"prefix"};
+        changes="$changes$comma$name";
         echo $changes;
     fi
   fi
