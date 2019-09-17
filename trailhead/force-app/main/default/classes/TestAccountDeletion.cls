@@ -13,7 +13,7 @@ private class TestAccountDeletion {
 
         // Verify that the deletion should have been stopped by the trigger,
         // so check that we got back an error.
-        //System.assert(!result.isSuccess());
+        System.assert(!result.isSuccess());
         System.assert(result.getErrors().size() > 0);
         System.assertEquals('Cannot delete account with related opportunities.',
                              result.getErrors()[0].getMessage());
@@ -47,7 +47,7 @@ private class TestAccountDeletion {
         // In this case the deletion should have been stopped by the trigger,
         // so check that we got back an error.
         for(Database.DeleteResult dr : results) {
-            //System.assert(!dr.isSuccess());
+            System.assert(!dr.isSuccess());
             System.assert(dr.getErrors().size() > 0);
             System.assertEquals('Cannot delete account with related opportunities.',
                                  dr.getErrors()[0].getMessage());
