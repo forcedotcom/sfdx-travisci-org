@@ -29,5 +29,5 @@ before_script:
 script:
 - sfdx force:auth:jwt:grant --instanceurl https://login.salesforce.com  --clientid
   $CONSUMERKEY --jwtkeyfile assets/server.key --username $USERNAME --setalias UAT
-# sfdx force:source:deploy -p $DEPLOYDIR
+- sfdx force:source:deploy -p $CHANGED_FILES
 
