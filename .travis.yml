@@ -5,6 +5,7 @@ env:
 before_install:
 # get list of changed files
 # save names of any change
+- quote="\""
 - changes=""
 - for file in $(git diff --name-only $TRAVIS_COMMIT_RANGE); do
   echo $file;
@@ -12,7 +13,7 @@ before_install:
     echo "match";
   else
     if [[ $changes == "" ]]; then
-        changes="$file";
+        changes="$quote$file";
         echo $changes;
     else
         comma=", ";
@@ -21,6 +22,9 @@ before_install:
     fi
   fi
   done
+  if [[ $changes != "" ]]; then
+    changes="$changes$quote";
+  fi
 - openssl aes-256-cbc -k "$super_secret_password" -in assets/server.key.enc -out assets/server.key
   -d
 - export CLIURL=https://developer.salesforce.com/media/salesforce-cli/sfdx-linux-amd64.tar.xz
