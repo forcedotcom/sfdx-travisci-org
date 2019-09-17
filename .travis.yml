@@ -53,5 +53,5 @@ script:
 - sfdx force:auth:jwt:grant --instanceurl https://login.salesforce.com  --clientid
   $CONSUMERKEY --jwtkeyfile assets/server.key --username $USERNAME --setalias UAT
 - cd trailhead/
-- sfdx force:source:deploy -p $changes -u mattvitale@gmail.com
+- sfdx force:source:deploy -p "force-app/main/default/classes/AccountHandler.cls, force-app/main/default/classes/AccountManager.cls" -u mattvitale@gmail.com
 
