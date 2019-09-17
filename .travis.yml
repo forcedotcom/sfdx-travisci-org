@@ -16,7 +16,7 @@ before_install:
     if [[ $changes == "" ]]; then
         name=$file;
         name=${name#"$prefix"};
-        changes="$quote$name";
+        changes="$name";
         echo $changes;
     else
         comma=", ";
@@ -28,7 +28,7 @@ before_install:
   fi
   done
 - if [[ $changes != "" ]]; then
-    changes="$changes$quote";
+    changes="$changes";
     echo $changes;
   fi
 - echo $changes;
@@ -53,5 +53,5 @@ script:
 - sfdx force:auth:jwt:grant --instanceurl https://login.salesforce.com  --clientid
   $CONSUMERKEY --jwtkeyfile assets/server.key --username $USERNAME --setalias UAT
 - cd trailhead/
-- sfdx force:source:deploy --sourcepath $changes -u mattvitale@gmail.com
+- sfdx force:source:deploy --sourcepath "$changes" -u mattvitale@gmail.com
 
