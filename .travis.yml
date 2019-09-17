@@ -16,11 +16,9 @@ before_install:
     echo "match";
   else
     if [[ $changes == "" ]]; then
-        changes="$file"
-        echo $changes;
+        echo "test1";
     else
-        comma=", "
-        changes="$changes$comma$file"
+        echo "test2";
     fi
   fi
   done
