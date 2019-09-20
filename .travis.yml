@@ -53,5 +53,5 @@ script:
 - sfdx force:auth:jwt:grant --instanceurl https://login.salesforce.com  --clientid
   $CONSUMERKEY --jwtkeyfile assets/server.key --username $USERNAME --setalias UAT
 - cd trailhead/
-- sfdx force:source:deploy --sourcepath "$changes" -u mattvitale@gmail.com
+- sfdx force:source:deploy --sourcepath "$changes" -u mattvitale@gmail.com --runtests "RunLocalTests"
 
