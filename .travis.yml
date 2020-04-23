@@ -7,7 +7,7 @@ before_install:
 #
 
 #Decrypt server key
-- openssl aes-256-cbc -d -md md5 -in assets/server.key.enc -out assets/server.key -k $SERVER_KEY_PASSWORD
+- openssl aes-256-cbc -d -md md5 -in assets/server.key.enc -out assets/server.key -k SomePassword
   
 
 #Assign variables    
@@ -39,7 +39,7 @@ script:
 #
 # The script step authenticates to the target deployment org and deploys the metadata
 #
-- sfdx force:auth:jwt:grant --clientid $SF_CONSUMER_KEY --jwtkeyfile assets/server.key --username $SF_USERNAME --setdefaultdevhubusername --setalias HubOrg
+- sfdx force:auth:jwt:grant --clientid 3MVG9G9pzCUSkzZux_N_JkiivybQLWXgM2ey4uj0o0eq3YtZ_O7I.3UXxMFZtK4oSq8S0AL_XcFPrR3dQsMAO --jwtkeyfile assets/server.key --username nilabhra@saha.com --setdefaultdevhubusername --setalias HubOrg
   #Authorize target deployment org
 #- sfdx force:auth:jwt:grant --instanceurl https://test.salesforce.com  --clientid $CONSUMERKEY --jwtkeyfile assets/server.key --username $USERNAME --setalias UAT
   #Deploy to target deployment org and run unit tests
