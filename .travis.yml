@@ -17,6 +17,9 @@ before_install:
 - export SFDX_DOMAIN_RETRY=300
 - export SFDX_DISABLE_APP_HUB=true
 - export SFDX_LOG_LEVEL=DEBUG
+- export ROOTDIR=force-app/main/default/
+- export TESTLEVEL=RunLocalTests
+
 #Create sfdx directory
 - mkdir sfdx
 #Install Salesforce CLI
