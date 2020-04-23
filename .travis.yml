@@ -7,8 +7,8 @@ before_install:
 #
 
 #Decrypt server key
-- openssl aes-256-cbc -K $encrypted_85b47e2f0acb_key -iv $encrypted_85b47e2f0acb_iv
-  -in assets/server.key.enc -out assets/server.key -d
+- openssl aes-256-cbc -d -md md5 -in assets/server.key.enc -out assets/server.key -k $SERVER_KEY_PASSWORD
+  
 
 #Assign variables    
 - export CLIURL=https://developer.salesforce.com/media/salesforce-cli/sfdx-linux-amd64.tar.xz  
@@ -39,10 +39,23 @@ script:
 #
 # The script step authenticates to the target deployment org and deploys the metadata
 #
-
+- sfdx force:auth:jwt:grant --clientid $SF_CONSUMER_KEY --jwtkeyfile assets/server.key --username $SF_USERNAME --setdefaultdevhubusername --setalias HubOrg
   #Authorize target deployment org
-- sfdx force:auth:jwt:grant --instanceurl https://test.salesforce.com  --clientid $CONSUMERKEY --jwtkeyfile assets/server.key --username $USERNAME --setalias UAT
+#- sfdx force:auth:jwt:grant --instanceurl https://test.salesforce.com  --clientid $CONSUMERKEY --jwtkeyfile assets/server.key --username $USERNAME --setalias UAT
   #Deploy to target deployment org and run unit tests
-- sfdx force:mdapi:deploy --wait 10 --deploydir $DEPLOYDIR --targetusername UAT --testlevel $TESTLEVEL
+#- sfdx force:mdapi:deploy --wait 10 --deploydir $DEPLOYDIR --targetusername UAT --testlevel $TESTLEVEL
   #Example shows how to run a check-only deploy.
   #- sfdx force:mdapi:deploy --checkonly --wait 10 --deploydir $DEPLOYDIR --targetusername UAT --testlevel $TESTLEVEL
+    
+    # set default CI scratch org
+  - sfdx force:auth:sfdxurl:store -f CIScratchOrgLogin.txt -d -a CI
+
+  # Push source to scratch org
+  - sfdx force:source:push --targetusername CI
+
+  # Run unit tests in scratch org
+  - sfdx force:apex:test:run --targetusername CI --wait 10 --resultformat tap --codecoverage --testlevel $TESTLEVEL
+  
+  # Deploy to dev/prod org
+  - sfdx force:source:deploy -p force-app -u HubOrg
+
