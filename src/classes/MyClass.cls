@@ -7,3 +7,5 @@ public with sharing class MyClass {
 		return '1.0.0';
 	}
 }
+
+

@@ -1,3 +1,8 @@
+language: ruby
+rvm:
+ - 2.2
+ - jruby
+
 #Gives permission to install Salesforce CLI
 sudo: true
 
@@ -7,8 +12,8 @@ before_install:
 #
 
 #Decrypt server key
-- openssl aes-256-cbc -K $encrypted_85b47e2f0acb_key -iv $encrypted_85b47e2f0acb_iv
-  -in assets/server.key.enc -out assets/server.key -d
+- openssl aes-256-cbc -d -md md5 -in assets/server.key.enc -out assets/server.key -k SomePassword
+  
 
 #Assign variables    
 - export CLIURL=https://developer.salesforce.com/media/salesforce-cli/sfdx-linux-amd64.tar.xz  
@@ -17,6 +22,9 @@ before_install:
 - export SFDX_DOMAIN_RETRY=300
 - export SFDX_DISABLE_APP_HUB=true
 - export SFDX_LOG_LEVEL=DEBUG
+- export ROOTDIR=force-app/main/default/
+- export TESTLEVEL=RunLocalTests
+
 #Create sfdx directory
 - mkdir sfdx
 #Install Salesforce CLI
@@ -39,10 +47,23 @@ script:
 #
 # The script step authenticates to the target deployment org and deploys the metadata
 #
-
+- sfdx force:auth:jwt:grant --clientid 3MVG9G9pzCUSkzZux_N_JkiivybQLWXgM2ey4uj0o0eq3YtZ_O7I.3UXxMFZtK4oSq8S0AL_XcFPrR3dQsMAO --jwtkeyfile assets/server.key --username nilabhra@saha.com --setdefaultdevhubusername --setalias HubOrg
   #Authorize target deployment org
-- sfdx force:auth:jwt:grant --instanceurl https://test.salesforce.com  --clientid $CONSUMERKEY --jwtkeyfile assets/server.key --username $USERNAME --setalias UAT
+#- sfdx force:auth:jwt:grant --instanceurl https://test.salesforce.com  --clientid $CONSUMERKEY --jwtkeyfile assets/server.key --username $USERNAME --setalias UAT
   #Deploy to target deployment org and run unit tests
-- sfdx force:mdapi:deploy --wait 10 --deploydir $DEPLOYDIR --targetusername UAT --testlevel $TESTLEVEL
+#- sfdx force:mdapi:deploy --wait 10 --deploydir $DEPLOYDIR --targetusername UAT --testlevel $TESTLEVEL
   #Example shows how to run a check-only deploy.
   #- sfdx force:mdapi:deploy --checkonly --wait 10 --deploydir $DEPLOYDIR --targetusername UAT --testlevel $TESTLEVEL
+    
+    # set default CI scratch org
+  - sfdx force:auth:sfdxurl:store -f CIScratchOrgLogin.txt -d -a CI
+
+  # Push source to scratch org
+  - sfdx force:source:push --targetusername CI
+
+  # Run unit tests in scratch org
+  - sfdx force:apex:test:run --targetusername CI --wait 10 --resultformat tap --codecoverage --testlevel $TESTLEVEL
+  
+  # Deploy to dev/prod org
+  - sfdx force:source:deploy -p force-app -u HubOrg
+
