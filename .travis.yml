@@ -22,7 +22,7 @@ before_install:
 - sfdx --version
 
 #Decrypt server key
-- openssl enc -nosalt -aes-256-cbc -d -in assets/server.key.enc -out assets/server.key -base64 -K $DECRYPTION_KEY -iv $DECRYPTION_IV
+- openssl enc -nosalt -aes-256-cbc -d -in assets/server.key.enc -out assets/server.key -base64 -K $encrypted_85b47e2f0acb_key -iv $encrypted_85b47e2f0acb_iv
 
 before_script:
 #
